@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "Nim_Game.h"
+
+#define TRUE 1
+#define FALSE 0
+
+int isWinning(struct NimGameInst* nimGame, int start)
+{
+  int next;
+  int i;
+  
+  if(start == 0)
+    {
+      return FALSE;
+    }
+  if(start < 0)
+    {
+      return TRUE;
+    }
+  
+  if(nimGame -> winningTable[start].visited == FALSE)
+    {
+      nimGame -> winningTable[start].visited = TRUE;
+      for(i = 0; i < nimGame -> moveSize; i++)
+	{
+	  next = start -(nimGame -> allowedMoves[i]);
+
+	  if(next < 0)
+	    {
+	      continue;
+	    }
+	  else
+	    {
+	      if(isWinning(nimGame, next) == FALSE)
+		{
+		  nimGame -> winningTable[start].winFlag = TRUE;
+		}
+	    }
+	}
+    }
+  return nimGame -> winningTable[start].winFlag;
+} 
+
+int main(int argc, char *argv[])
+{
+  int result;
+  int i = 0;
+  int j = 2;
+  int arrSize = argc - 2;
+  int moveSize = 0;
+  int allowedMoves[arrSize];
+  int size = atoi(argv[1]);
+
+  while(argv[j] != NULL)
+    {
+      allowedMoves[i++] = atoi(argv[j++]);
+      moveSize++;
+    }
+
+  struct NimGameInst* nimGame = createNimGameInst(size, moveSize, allowedMoves);
+  result = isWinning(nimGame, size);
+  printf("%d\n", result);
+
+  free(nimGame->winningTable);
+  free(nimGame);
+
+  return 0;
+}

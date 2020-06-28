@@ -1,0 +1,138 @@
+Pile Size: 45   Allowed Moves: 1 2 3 4 5 6 7 8 9
+
+migonzalez@sycorax:~/cs362$ ./Nim
+Welcome to One-Pile Nim.
+What size would you want your pile?
+45
+What will be the allowed moves? (Please seperate by space)
+1 2 3 4 5 6 7 8 9
+45 remaining.
+Computer's Turn! How many will you take?
+Computer took 5!
+
+40 remaining.
+Player's Turn! How many will you take?
+4
+Player took 4!
+
+36 remaining.
+Computer's Turn! How many will you take?
+Computer took 6!
+
+30 remaining.
+Player's Turn! How many will you take?
+7
+Player took 7!
+
+23 remaining.
+Computer's Turn! How many will you take?
+Computer took 3!
+
+20 remaining.
+Player's Turn! How many will you take?
+7
+Player took 7!
+
+13 remaining.
+Computer's Turn! How many will you take?
+Computer took 3!
+
+10 remaining.
+Player's Turn! How many will you take?
+2
+Player took 2!
+
+8 remaining.
+Computer's Turn! How many will you take?
+Computer took 8!
+
+Computer has won!
+migonzalez@sycorax:~/cs362$
+
+Pile Size: 100    Allowed Moves: 2 5 9
+
+migonzalez@sycorax:~/cs362$ ./Nim
+Welcome to One-Pile Nim.
+What size would you want your pile?
+100
+What will be the allowed moves? (Please seperate by space)
+2 5 9
+100 remaining.
+Computer's Turn! How many will you take?
+Computer took 9!
+
+91 remaining.
+Player's Turn! How many will you take?
+9
+Player took 9!
+
+82 remaining.
+Computer's Turn! How many will you take?
+Computer took 5!
+
+77 remaining.
+Player's Turn! How many will you take?
+5
+Player took 5!
+
+72 remaining.
+Computer's Turn! How many will you take?
+Computer took 9!
+
+63 remaining.
+Player's Turn! How many will you take?
+2
+Player took 2!
+
+61 remaining.
+Computer's Turn! How many will you take?
+Computer took 5!
+
+56 remaining.
+Player's Turn! How many will you take?
+2
+Player took 2!
+
+54 remaining.
+Computer's Turn! How many will you take?
+Computer took 5!
+
+49 remaining.
+Player's Turn! How many will you take?
+9
+Player took 9!
+
+40 remaining.
+Computer's Turn! How many will you take?
+Computer took 5!
+
+35 remaining.
+Player's Turn! How many will you take?
+5
+Player took 5!
+
+30 remaining.
+Computer's Turn! How many will you take?
+Computer took 9!
+
+21 remaining.
+Player's Turn! How many will you take?
+2
+Player took 2!
+
+19 remaining.
+Computer's Turn! How many will you take?
+Computer took 5!
+
+14 remaining.
+Player's Turn! How many will you take?
+9
+Player took 9!
+
+5 remaining.
+Computer's Turn! How many will you take?
+Computer took 5!
+
+Computer has won!
+migonzalez@sycorax:~/cs362$
+

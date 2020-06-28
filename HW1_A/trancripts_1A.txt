@@ -1,0 +1,9 @@
+migonzalez@westernstar:~/cs362$ ./IsWinning 100 1 2 3
+0
+migonzalez@westernstar:~/cs362$ ./IsWinning 1000 1 4 5 10
+1
+migonzalez@westernstar:~/cs362$ ./IsWinning 14000 1 2 3 4 5 6
+0
+migonzalez@westernstar:~/cs362$ ./IsWinning 235 1 5 10
+0
+

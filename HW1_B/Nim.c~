@@ -1,0 +1,189 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "Nim_Game.h"
+
+#define TRUE 1
+#define FALSE 0
+
+int isWinning(struct NimGameInst* nimGame, int start)
+{
+  int next;
+  int i;
+  
+  if(start == 0)
+    {
+      return FALSE;
+    }
+  if(start < 0)
+    {
+      return TRUE;
+    }
+  
+  if(nimGame -> winningTable[start].visited == FALSE)
+    {
+      nimGame -> winningTable[start].visited = TRUE;
+      for(i = 0; i < nimGame -> moveSize; i++)
+	{
+	  next = start -(nimGame -> allowedMoves[i]);
+
+	  if(next < 0)
+	    {
+	      continue;
+	    }
+	  else
+	    {
+	      if(isWinning(nimGame, next) == FALSE)
+		{
+		  nimGame -> winningTable[start].winFlag = TRUE;
+		}
+	    }
+	}
+    }
+  return nimGame -> winningTable[start].winFlag;
+}
+
+void startGame(struct NimGameInst* nimGame, int size, int computerFlag)
+{
+  int i = 0;
+  int remaining = size;
+  int best = 0;
+  int illegalFlag = TRUE;
+  int noMoveFlag = TRUE;
+
+  if(size <= 0)
+    {
+      if(computerFlag == TRUE)
+	{
+	  printf("Player has won!\n");
+	  return;
+	}
+      else
+	{
+	  printf("Computer has won!\n");
+	  return;
+	}
+    }
+  
+  if(computerFlag == TRUE)
+    {
+      printf("%d remaining. \n", remaining);
+      printf("Computer's Turn! ");
+      printf("How many will you take?\n");
+      for(i = 0; i < nimGame -> moveSize; i++)
+	{
+	  remaining = size - (nimGame -> allowedMoves[i]);
+	  if(remaining >= 0)
+	    {
+	      noMoveFlag = FALSE;
+	    }
+	  else
+	    {
+	      break;
+	    }
+
+	  if(nimGame -> winningTable[remaining].winFlag == FALSE)
+	    {
+	      best = nimGame -> allowedMoves[i];
+	    }
+	  
+	  remaining = size;
+	}
+
+       if(noMoveFlag == TRUE)
+	    {
+	      printf("Computer cannot move! ");
+	      printf("Player Wins!\n");
+	      return;
+	    }
+
+      remaining = size - best;
+      printf("Computer took %d!\n\n", best);
+      computerFlag = FALSE;
+    }
+  else
+    {
+      printf("%d remaining. \n", remaining);
+      printf("Player's Turn! ");
+      printf("How many will you take?\n");
+      while(illegalFlag == TRUE)
+	{
+	  scanf("%d", &best);
+	  for(i = 0; i < nimGame -> moveSize; i++)
+	    {
+	      if(best == (nimGame -> allowedMoves[i]))
+		{
+		  illegalFlag = FALSE;
+		}
+	    }
+
+	  remaining = size - best;
+	  if(remaining < 0)
+	    {
+	      printf("Player cannot move! Computer Wins!\n");
+	      return;
+	    }
+
+	  if(illegalFlag == FALSE)
+	    {
+	      break;
+	    }
+	  printf("Illegal Move! Please choose another number in the allowed");
+          printf(" move set!\n");
+	}
+      remaining = size - best;
+      printf("Player took %d!\n\n", best);
+      computerFlag = TRUE;
+    }
+
+  startGame(nimGame, remaining, computerFlag);
+}
+
+int main()
+{
+  int result;
+  int size;
+  int moveSize;
+  int arr[100];
+  char temp;
+  int j;
+  int computerFlag= TRUE;
+  int i = 0;
+  
+
+  printf("Welcome to One-Pile Nim.\n");
+  printf("What size would you want your pile?\n");
+  scanf("%d", &size);
+  printf("What will be the allowed moves? (Please seperate by space)\n");
+
+  do
+    {
+      scanf("%d%c", &arr[i], &temp);
+      i++;
+    } while(temp != '\n');
+
+  moveSize = i;
+  int allowedMoves[i];
+
+  for(j = 0; j < i; j++)
+    {
+      allowedMoves[j] = arr[j];
+    }
+
+  struct NimGameInst* nimGame = createNimGameInst(size, moveSize, allowedMoves);
+  result = isWinning(nimGame, size);
+
+  if(result == FALSE)
+    {
+      computerFlag = FALSE;
+      startGame(nimGame, size, computerFlag);
+    }
+  else
+    {
+      startGame(nimGame, size, computerFlag);
+    }
+  
+  free(nimGame);
+
+  return 0;
+}
